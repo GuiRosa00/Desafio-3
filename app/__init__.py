@@ -13,8 +13,11 @@ from app.pacientes import model
 from app.receitas import model
 
 def create_app():
+    """create_app(None)-> object
+    Cria o app do Flask utilizado como back-end do sistema"""
     app = Flask(__name__)
     app.config.from_object(Config)
+    #metodos registrados pelo Blueprint
     app.register_blueprint(consulta_api)
     app.register_blueprint(exame_api)
     app.register_blueprint(receita_api)

@@ -5,7 +5,10 @@ from app.extensions import db
 exame_api = Blueprint('exame_api',__name__)
 
 @exame_api.route('/exames', methods = ['POST'])
-def criar_consulta():
+def criar_exame():
+    """criar_exame(None)-> tuple(dict,int)
+    Cria no banco de dados uma instancia de um Exame e caso seja bem sucedido, 
+    retorna os dados do Exame no formato json e uma mensagem de sucesso (200)"""
     if request.method == 'POST':
         dados = request.json
         data = dados.get("data")

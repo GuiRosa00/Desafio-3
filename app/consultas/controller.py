@@ -6,6 +6,9 @@ consulta_api = Blueprint('consulta_api',__name__)
 
 @consulta_api.route('/consultas', methods = ['POST'])
 def criar_consulta():
+    """criar_consulta(None)-> tuple(dict,int)
+    Cria no banco de dados uma instancia de uma consulta e caso seja bem sucedido, 
+    retorna os dados da consulta no formato json e uma mensagem de sucesso (200)"""
     if request.method == 'POST':
         dados = request.json
         data = dados.get("data")

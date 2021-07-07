@@ -5,7 +5,10 @@ from app.extensions import db
 receita_api = Blueprint('receita_api',__name__)
 
 @receita_api.route('/receitas', methods = ['POST'])
-def criar_consulta():
+def criar_receita():
+    """criar_exame(None)-> tuple(dict,int)
+    Cria no banco de dados uma instancia de uma Receita e caso seja bem sucedido, 
+    retorna os dados da Receita no formato json e uma mensagem de sucesso (200)"""
     if request.method == 'POST':
         dados = request.json
         remedio = dados.get("remedio")
