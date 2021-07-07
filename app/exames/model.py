@@ -5,5 +5,5 @@ class Exame(db.Model):
     id = db.Column(db.Interger,primary_key = True)
     tipo = db.Column(db.String(20),nullable = False)
     data = db.Column(db.Interger,nullable = False)
-    #medico
-    #paciente
+    medico_id = db.Column(db.Interger, db.ForeignKey('medico.id'))
+    paciente_id = db.Column(db.Interger, db.ForeignKey('paciente.id'))

@@ -1,4 +1,3 @@
-from flask_sqlalchemy.model import Model
 from app.extensions import db
 
 class Paciente(db.Model):
@@ -11,9 +10,9 @@ class Paciente(db.Model):
     endereco = db.Column(db.String(50),nullable = False)
     cpf = db.Column(db.Interger,unique = True,nullable = False)
     plano = db.Column(db.String(20),nullable = False)
-    estado = db.Column(db.String(10),nullable = False)
-    contato = db.Column(db.String(13),nullable = False)
+    estado_civil = db.Column(db.String(10),nullable = False)
+    contato = db.Column(db.String(13),unique = True,nullable = False)#evitar telefones inexistentes
+    exames = db.relationship('Exame',backref='paciente')
+    receitas= db.relationship('Receita',backref='paciente')
+    consultas= db.relationship('Consulta',backref='paciente')
     #medico
-    #receita
-    #consulta
-    #exame
