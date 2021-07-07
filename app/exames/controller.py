@@ -14,7 +14,7 @@ def criar_exame():
         data = dados.get("data")
         tipo = dados.get("tipo")
         if not (isinstance(data,str) or isinstance(tipo,str)):
-            return {'Error': "Data ou Tipo de Exame com Tipo Inválido"}
+            return {'Error': "Data ou Tipo de Exame com Tipo Inválido (diferente de str)"}
         exame = Exame(data=data, tipo=tipo)
         db.session.add(exame)
         db.session.commit()

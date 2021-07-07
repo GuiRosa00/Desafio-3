@@ -1,10 +1,11 @@
 from flask import request,Blueprint
 from app.medicos.model import Medico
 from app.extensions import db
+from sqlalchemy.exc import IntegrityError 
 
 medico_api = Blueprint('medico_api',__name__)
 
-@medico_api.route('/pacientes', methods = ['POST'])
+@medico_api.route('/medicos', methods = ['POST'])
 def criar_paciente():
     """criar_paciente(None)-> tuple(dict,int)
     Cria no banco de dados uma instancia de um Paciente e caso seja bem sucedido, 
@@ -22,12 +23,12 @@ def criar_paciente():
         cpf = dados.get("cpf")
         contato = dados.get("contato")
         registro = dados.get("registro")
-        data_str = [nome,genero,endereco,espec,estado]
-        data_int = [idade,rg,cpf,contato,registro]
+        data_str = [(nome,'nome'),(genero,'genero'),(endereco,'endereco'),(espec, 'espec'),(estado,'estado')]
+        data_int = [(idade,'idade'),(rg,'rg'),(cpf,'cpf'),(contato,'contato'),(registro,'registro')]
         for data in data_str:
-            if not isinstance(data,str): return {"Error": "Um dos Dados String não está tipado como str"}
+            if not isinstance(data[0],str): return {"Error": f"O Dado: {data[1]} não está tipado como str"}
         for data in data_int:
-            if not isinstance(data,int): return {"Error": "Um dos Dados Inteiros não está tipado como int"}
+            if not isinstance(data[0],int): return {"Error": f"O Dado: {data[1]} não está tipado como int"}
         medico = Medico(nome=nome, genero=genero,endereco=endereco,espec=espec,estado=estado,idade=idade,rg=rg,cpf=cpf,contato=contato,registro = registro)
         db.session.add(medico)
         db.session.commit()

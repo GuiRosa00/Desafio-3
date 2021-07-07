@@ -21,12 +21,12 @@ def criar_paciente():
         rg = dados.get("rg")
         cpf = dados.get("cpf")
         contato = dados.get("contato")
-        data_str = [nome,genero,endereco,plano,estado]
-        data_int = [idade,rg,cpf,contato]
+        data_str = [(nome,'nome'),(genero,'genero'),(endereco,'endereco'),(plano, 'plano'),(estado,'estado')]
+        data_int = [(idade,'idade'),(rg,'rg'),(cpf,'cpf'),(contato,'contato')]
         for data in data_str:
-            if not isinstance(data,str): return {"Error": "Um dos Dados String não está tipado como str"}
+            if not isinstance(data[0],str): return {"Error": f"O Dado: {data[1]} não está tipado como str"}
         for data in data_int:
-            if not isinstance(data,int): return {"Error": "Um dos Dados Inteiros não está tipado como int"}
+            if not isinstance(data[0],int): return {"Error": f"O Dado: {data[1]} não está tipado como int"}
         paciente = Paciente(nome=nome, genero=genero,endereco=endereco,plano=plano,estado_civil=estado,idade=idade,rg=rg,cpf=cpf,contato=contato)
         db.session.add(paciente)
         db.session.commit()

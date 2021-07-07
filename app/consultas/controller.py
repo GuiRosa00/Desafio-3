@@ -14,7 +14,7 @@ def criar_consulta():
         data = dados.get("data")
         motivo = dados.get("motivo")
         if not (isinstance(data,str) or isinstance(motivo,str)):
-            return {'Error': "Data ou Motivo da Consulta com Tipo Inválido"}
+            return {'Error': "Data ou Motivo da Consulta com Tipo Inválido (diferente de str)"}
         consulta = Consulta(data=data, motivo=motivo)
         db.session.add(consulta)
         db.session.commit()

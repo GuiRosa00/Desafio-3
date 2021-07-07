@@ -13,7 +13,7 @@ def criar_receita():
         dados = request.json
         remedio = dados.get("remedio")
         if not (isinstance(remedio,str)):
-            return {'Error': "Remédio com Tipo Inválido"}
+            return {'Error': "Remédio com Tipo Inválido (diferente de str)"}
         receita = Receita(remedio = remedio)
         db.session.add(receita)
         db.session.commit()
