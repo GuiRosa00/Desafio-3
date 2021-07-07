@@ -18,4 +18,22 @@ class Paciente(db.Model):
     exames = db.relationship('Exame',backref='paciente')
     receita_id= db.Column(db.Integer,db.ForeignKey('receita.id'))
     consultas= db.relationship('Consulta',backref='paciente')
-    pacientes= db.relationship('Medico',secondary = association_med_pac, backref = db.backref('pacientes', lazy = 'dynamic'))
+    medicos= db.relationship('Medico',secondary = association_med_pac, backref = db.backref('pacientes', lazy = 'dynamic'))
+
+    def json(self):
+        """json(self)-> dict
+        Retorna os dados de um paciente no formato JSON"""
+        dic = {'id':self.id,
+        'nome': self.nome,
+        'genero': self.genero,
+        'idade': self.idade,
+        'rg': self.rg,
+        'endereco':self.endereco,
+        'cpf': self.cpf,
+        'plano de saude': self.plano,
+        'estado civil': self.estado_c,
+        'Exames': self.exames,
+        "Receita": self.receita_id,
+        "Consulta": self.consultas,
+        "Medicos": self.medicos}
+        return dic

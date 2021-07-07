@@ -19,4 +19,4 @@ class Medico(db.Model):
     exames = db.relationship('Exame',backref='medico')
     receitas= db.relationship('Receita',backref='medico')
     consultas= db.relationship('Consulta',backref='medico')
-    medicos= db.relationship('Paciente',secondary = association_med_pac, backref = db.backref('medicos', lazy = 'dynamic'))
+    pacientes = db.relationship('Paciente',secondary = association_med_pac, backref = db.backref('medicos', lazy = 'dynamic'))
