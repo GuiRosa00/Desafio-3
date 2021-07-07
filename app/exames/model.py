@@ -7,3 +7,10 @@ class Exame(db.Model):
     data = db.Column(db.Integer,nullable = False)
     medico_id = db.Column(db.Integer, db.ForeignKey('medico.id'))
     paciente_id = db.Column(db.Integer, db.ForeignKey('paciente.id'))
+    def json(self):
+        dic = {'id':self.id,
+        'data': self.data,
+        'tipo de exame': self.tipo,
+        'ID do Médico': self.medico_id,
+        'ID do Paciente': self.paciente_id}
+        return dic
