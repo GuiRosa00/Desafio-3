@@ -9,6 +9,8 @@ class Consulta(db.Model):
     paciente_id = db.Column(db.Integer, db.ForeignKey('paciente.id'))
     def json(self):
         dic = {'id':self.id,
-        'data': self.data,
-        'motivo': self.motivo,}
+        'Data da Consulta': self.data,
+        'Motivo da Consulta': self.motivo,
+        'ID do Médico': self.medico_id,
+        'ID do Paciente': self.paciente_id}
         return dic
