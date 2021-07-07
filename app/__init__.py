@@ -1,7 +1,10 @@
 from flask import Flask
 from app.config import Config
 from app.extensions import db,migrate
+
 from app.consultas.controller import consulta_api
+from app.exames.controller import exame_api
+from app.receitas.controller import receita_api
 
 from app.consultas import model
 from app.exames import model
@@ -13,6 +16,8 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
     app.register_blueprint(consulta_api)
+    app.register_blueprint(exame_api)
+    app.register_blueprint(receita_api)
     db.init_app(app)
     migrate.init_app(app,db)
     return app
