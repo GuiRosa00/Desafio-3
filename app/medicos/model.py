@@ -1,3 +1,4 @@
+from app.association import association_med_pac
 from app.extensions import db
 
 class Medico(db.Model):
@@ -13,7 +14,7 @@ class Medico(db.Model):
     estado = db.Column(db.String(10),nullable = False)
     contato = db.Column(db.String(13),nullable = False)
     registro = db.Column(db.Interger,unique = True,nullable = False)
-    #paciente
-    #receita
-    #exame
-    #consulta
+    exames = db.relationship('Exame',backref='medico')
+    receitas= db.relationship('Receita',backref='medico')
+    consultas= db.relationship('Consulta',backref='medico')
+    medicos= db.relationship('Paciente',secondary = association_med_pac, backref = db.backref('medicos', lazy = 'dynamic'))
