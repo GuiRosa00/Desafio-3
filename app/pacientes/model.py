@@ -13,6 +13,6 @@ class Paciente(db.Model):
     estado_civil = db.Column(db.String(10),nullable = False)
     contato = db.Column(db.String(13),unique = True,nullable = False)#evitar telefones inexistentes
     exames = db.relationship('Exame',backref='paciente')
-    receitas= db.relationship('Receita',backref='paciente')
+    receita= db.relationship('Receita',backref='paciente')
     consultas= db.relationship('Consulta',backref='paciente')
     #medico
