@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: c9bde5c6361c
+Revision ID: a64ff3b48970
 Revises: 
-Create Date: 2021-07-07 12:13:10.781682
+Create Date: 2021-07-07 15:41:58.836975
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'c9bde5c6361c'
+revision = 'a64ff3b48970'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -28,7 +28,7 @@ def upgrade():
     sa.Column('cpf', sa.Integer(), nullable=False),
     sa.Column('espec', sa.String(length=20), nullable=False),
     sa.Column('estado', sa.String(length=10), nullable=False),
-    sa.Column('contato', sa.String(length=13), nullable=False),
+    sa.Column('contato', sa.Integer(), nullable=False),
     sa.Column('registro', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('cpf'),
@@ -37,7 +37,7 @@ def upgrade():
     )
     op.create_table('receita',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('remedio', sa.String(), nullable=False),
+    sa.Column('remedio', sa.String(length=50), nullable=False),
     sa.Column('medico_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['medico_id'], ['medico.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -46,13 +46,13 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('nome', sa.String(length=30), nullable=False),
     sa.Column('genero', sa.String(length=10), nullable=False),
-    sa.Column('idade', sa.Integer(), nullable=False),
-    sa.Column('rg', sa.Integer(), nullable=False),
     sa.Column('endereco', sa.String(length=50), nullable=False),
-    sa.Column('cpf', sa.Integer(), nullable=False),
     sa.Column('plano', sa.String(length=20), nullable=False),
     sa.Column('estado_civil', sa.String(length=10), nullable=False),
-    sa.Column('contato', sa.String(length=13), nullable=False),
+    sa.Column('idade', sa.Integer(), nullable=False),
+    sa.Column('contato', sa.Integer(), nullable=False),
+    sa.Column('rg', sa.Integer(), nullable=False),
+    sa.Column('cpf', sa.Integer(), nullable=False),
     sa.Column('receita_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['receita_id'], ['receita.id'], ),
     sa.PrimaryKeyConstraint('id'),
@@ -68,8 +68,8 @@ def upgrade():
     )
     op.create_table('consulta',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('data', sa.Integer(), nullable=False),
-    sa.Column('motivo', sa.String(length=20), nullable=False),
+    sa.Column('data', sa.String(length=8), nullable=False),
+    sa.Column('motivo', sa.String(length=50), nullable=False),
     sa.Column('medico_id', sa.Integer(), nullable=True),
     sa.Column('paciente_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['medico_id'], ['medico.id'], ),
@@ -79,7 +79,7 @@ def upgrade():
     op.create_table('exame',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('tipo', sa.String(length=20), nullable=False),
-    sa.Column('data', sa.Integer(), nullable=False),
+    sa.Column('data', sa.String(length=8), nullable=False),
     sa.Column('medico_id', sa.Integer(), nullable=True),
     sa.Column('paciente_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['medico_id'], ['medico.id'], ),

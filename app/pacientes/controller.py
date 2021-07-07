@@ -14,20 +14,20 @@ def criar_paciente():
         #dados do paciente
         nome = dados.get("nome")
         genero = dados.get("genero")
+        endereco = dados.get("endereco")
+        plano = dados.get("plano")
+        estado = dados.get("estado")
         idade = dados.get("idade")
         rg = dados.get("rg")
-        endereco = dados.get("endereco")
         cpf = dados.get("cpf")
-        plano = dados.get("plano")
-        estado_c = dados.get("estado")
         contato = dados.get("contato")
-        data_str = [nome,genero,endereco,plano,estado_c]
+        data_str = [nome,genero,endereco,plano,estado]
         data_int = [idade,rg,cpf,contato]
         for data in data_str:
             if not isinstance(data,str): return {"Error": "Um dos Dados String não está tipado como str"}
         for data in data_int:
             if not isinstance(data,int): return {"Error": "Um dos Dados Inteiros não está tipado como int"}
-        paciente = Paciente(nome=nome, genero=genero,idade=idade,rg=rg,endereco=endereco,cpf=cpf,plano=plano,estado_c=estado_c,contato=contato)
+        paciente = Paciente(nome=nome, genero=genero,endereco=endereco,plano=plano,estado_civil=estado,idade=idade,rg=rg,cpf=cpf,contato=contato)
         db.session.add(paciente)
         db.session.commit()
         return paciente.json(), 200
