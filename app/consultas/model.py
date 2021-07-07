@@ -6,7 +6,7 @@ class Consulta(db.Model):
     data = db.Column(db.Integer,nullable = False)
     motivo = db.Column(db.String(20),nullable = False)
     medico_id = db.Column(db.Integer, db.ForeignKey('medico.id'))
-    #paciente_id = db.Column(db.Integer, db.ForeignKey('paciente.id'))
+    paciente_id = db.Column(db.Integer, db.ForeignKey('paciente.id'))
     def json(self):
         dic = {'id':self.id,
         'data': self.data,

@@ -14,6 +14,6 @@ class Paciente(db.Model):
     estado_civil = db.Column(db.String(10),nullable = False)
     contato = db.Column(db.String(13),unique = True,nullable = False)
     exames = db.relationship('Exame',backref='paciente')
-    receita= db.relationship('Receita',backref='paciente')
+    receita_id= db.Column(db.Integer,db.ForeignKey('receita.id'))
     consultas= db.relationship('Consulta',backref='paciente')
     pacientes= db.relationship('Medico',secondary = association_med_pac, backref = db.backref('pacientes', lazy = 'dynamic'))
