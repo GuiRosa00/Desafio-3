@@ -1,3 +1,4 @@
+from app import pacientes
 from app.association import association_med_pac
 from app.extensions import db
 
@@ -19,3 +20,23 @@ class Medico(db.Model):
     exames = db.relationship('Exame',backref='medico')
     receitas= db.relationship('Receita',backref='medico')
     consultas= db.relationship('Consulta',backref='medico')
+
+    def json(self):
+        """json(self)-> dict
+        Retorna os dados de um Médico no formato JSON"""
+        dic = {'id':self.id,
+        'nome': self.nome,
+        'genero': self.genero,
+        'idade': self.idade,
+        'rg': self.rg,
+        'endereco':self.endereco,
+        'cpf': self.cpf,
+        'Especializacao': self.espec,
+        'estado civil': self.estado,
+        'contato': self.contato,
+        'registro': self.registro,
+        'Exames': self.exames,
+        "Receitas": self.receitas,
+        "Consulta": self.consultas,
+        "Pacientes": self.paciente}
+        return dic
