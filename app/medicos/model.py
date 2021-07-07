@@ -1,4 +1,4 @@
-from sqlalchemy.orm import backref
+from app.association import association_med_pac
 from app.extensions import db
 
 class Medico(db.Model):
@@ -17,4 +17,4 @@ class Medico(db.Model):
     exames = db.relationship('Exame',backref='medico')
     receitas= db.relationship('Receita',backref='medico')
     consultas= db.relationship('Consulta',backref='medico')
-    #pacientes
+    medicos= db.relationship('Paciente',secondary = association_med_pac, backref = db.backref('medicos', lazy = 'dynamic'))

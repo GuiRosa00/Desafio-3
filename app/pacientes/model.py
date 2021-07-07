@@ -1,4 +1,5 @@
 from app.extensions import db
+from app.association import association_med_pac
 
 class Paciente(db.Model):
     __tablename__ = 'paciente'
@@ -11,8 +12,8 @@ class Paciente(db.Model):
     cpf = db.Column(db.Interger,unique = True,nullable = False)
     plano = db.Column(db.String(20),nullable = False)
     estado_civil = db.Column(db.String(10),nullable = False)
-    contato = db.Column(db.String(13),unique = True,nullable = False)#evitar telefones inexistentes
+    contato = db.Column(db.String(13),unique = True,nullable = False)
     exames = db.relationship('Exame',backref='paciente')
     receita= db.relationship('Receita',backref='paciente')
     consultas= db.relationship('Consulta',backref='paciente')
-    #medico
+    pacientes= db.relationship('Medico',secondary = association_med_pac, backref = db.backref('pacientes', lazy = 'dynamic'))
